@@ -24,10 +24,10 @@ jobs:
           wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
           sudo add-apt-repository ppa:ubuntu-toolchain-r/test && apt-get update
           sudo apt-get install -y g++-10 gdb build-essential
-          update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
-          update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
           sudo apt-get install -y --no-install-recommends libpcre3 libpcre3-dev # Swig deps
-          sh ci/buildandinstallswig.sh ${SWIG_VERSION}
+          sudo sh ci/buildandinstallswig.sh ${SWIG_VERSION}
 
     - name: build
       run: |

@@ -27,7 +27,7 @@ jobs:
           sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
           sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
           sudo apt-get install -y --no-install-recommends libpcre3 libpcre3-dev # Swig deps
-          sudo sh ci/buildandinstallswig.sh ${SWIG_VERSION}
+#         sudo sh ci/buildandinstallswig.sh ${SWIG_VERSION}
 
     - name: build
       run: |

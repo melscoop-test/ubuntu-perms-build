@@ -1,20 +1,20 @@
 
 on: [push]
-
+  
 jobs:
-build:
-  runs-on: [ self-hosted ]
-  env:
-   SWIG_VERSION: 4.0.2
-   DEBIAN_FRONTEND: noninteractive
-  container:
+  
+  build:
+   runs-on: [ self-hosted ]
+   env:
+    SWIG_VERSION: 4.0.2
+    DEBIAN_FRONTEND: noninteractive
+   container:
     image: ubuntu:bionic
-
-steps:
-   - uses: actions/checkout@v1
-   - name: setup
-
-     run: |
+    
+   steps:
+    - uses: actions/checkout@v1
+    - name: setup
+      run: |
           set -e
           apt-get update
           DEBIAN_FRONTEND=noninteractive apt-get install -y make ninja-build doxygen graphviz openjdk-8-jdk maven python3-pip git
@@ -29,9 +29,8 @@ steps:
           apt-get install -y --no-install-recommends libpcre3 libpcre3-dev # Swig deps
           sh ci/buildandinstallswig.sh ${SWIG_VERSION}
 
-   - name: build
-
-     run: |
+    - name: build
+      run: |
           mvn validate
           mvn test
           mvn clean package

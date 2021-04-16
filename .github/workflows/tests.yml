@@ -1,0 +1,39 @@
+
+on: [push]
+
+jobs:
+build:
+  runs-on: [ self-hosted ]
+  env:
+   SWIG_VERSION: 4.0.2
+   DEBIAN_FRONTEND: noninteractive
+  container:
+    image: ubuntu:bionic
+
+steps:
+   - uses: actions/checkout@v1
+   - name: setup
+
+     run: |
+          set -e
+          apt-get update
+          DEBIAN_FRONTEND=noninteractive apt-get install -y make ninja-build doxygen graphviz openjdk-8-jdk maven python3-pip git
+          pip3 install --upgrade pip setuptools
+          pip3 install conan
+          apt-get install -y software-properties-common apt-transport-https ca-certificates gnupg wget
+          wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
+          add-apt-repository ppa:ubuntu-toolchain-r/test && apt-get update
+          apt-get install -y g++-10 gdb build-essential
+          update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
+          update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
+          apt-get install -y --no-install-recommends libpcre3 libpcre3-dev # Swig deps
+          sh ci/buildandinstallswig.sh ${SWIG_VERSION}
+
+   - name: build
+
+     run: |
+          mvn validate
+          mvn test
+          mvn clean package
+          
+          

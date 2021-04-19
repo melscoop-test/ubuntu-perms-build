@@ -20,19 +20,19 @@ jobs:
           DEBIAN_FRONTEND=noninteractive apt-get install -y make ninja-build doxygen graphviz openjdk-8-jdk maven python3-pip git
           pip3 install --upgrade pip setuptools
           pip3 install conan
-#          sudo apt-get install -y software-properties-common apt-transport-https ca-certificates gnupg wget
-#          wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
-#          sudo add-apt-repository ppa:ubuntu-toolchain-r/test && apt-get update
-#          sudo apt-get install -y g++-10 gdb build-essential
-#          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
-#          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
-#          sudo apt-get install -y --no-install-recommends libpcre3 libpcre3-dev # Swig deps
-#         sudo sh ci/buildandinstallswig.sh ${SWIG_VERSION}
+          sudo apt-get install -y software-properties-common apt-transport-https ca-certificates gnupg wget
+          wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test && apt-get update
+          sudo apt-get install -y g++-10 gdb build-essential
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
+          sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
+          sudo apt-get install -y --no-install-recommends libpcre3 libpcre3-dev # Swig deps
+          sudo sh ci/buildandinstallswig.sh ${SWIG_VERSION}
 
-#    - name: build
-#      run: |
-#          mvn validate
-#          mvn test
-#          mvn clean package
+    - name: build
+      run: |
+          mvn validate
+          mvn test
+          mvn clean package
           
           

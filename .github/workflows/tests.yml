@@ -27,6 +27,7 @@ jobs:
           update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 10
           update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-10 10
           apt-get install -y --no-install-recommends libpcre3 libpcre3-dev # Swig deps
+          chmod 755 ci/buildandinstallswig.sh
           sh ci/buildandinstallswig.sh ${SWIG_VERSION}
 
     - name: build

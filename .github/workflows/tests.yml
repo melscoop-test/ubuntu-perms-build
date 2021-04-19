@@ -3,7 +3,7 @@ on: [push]
   
 jobs:
   build:
-   runs-on: [ self-hosted ]
+   runs-on: [ ubuntu-18.04 ]
    env:
     SWIG_VERSION: 4.0.2
     DEBIAN_FRONTEND: noninteractive
